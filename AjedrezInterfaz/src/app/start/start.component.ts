@@ -14,10 +14,11 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
   }
   enviar(){
-    console.log(this.player1)
+    /*los nombres  de los jugadores se guardaran en el localStorage*/
+    //console.log(this.player1)
     localStorage.setItem('user1', this.player1 );
     localStorage.setItem('user2', this.player2 );
-    this.route.navigate(['/juego']);
+    this.route.navigate(['/juego']); //redireccionamiento de pagina al tablero de juego
   }
 
 }

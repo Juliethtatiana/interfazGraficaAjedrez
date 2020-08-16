@@ -3,4 +3,5 @@ export interface Jugador {
     color: string;
     nombre: string;
     posicionesFichas:[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
+    fichasMuertas:[{}];
   }

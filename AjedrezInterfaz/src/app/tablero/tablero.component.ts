@@ -7,10 +7,9 @@ import { Component, OnInit,  Input} from '@angular/core';
   styleUrls: ['./tablero.component.css']
 })
 export class TableroComponent implements OnInit {
-  //las posiciones  de las fichas se piensan  extraer de la parte logica por medio de una peticion HTTP
   @Input() posFichas1: any = [];
   @Input() posFichas2: any = [];
-
+  idFichaAnt:string = "0-0";
   filas = [];
 
 
@@ -50,8 +49,11 @@ export class TableroComponent implements OnInit {
     }
   }
   seleccionar(id){
-    document.getElementById(id).classList.add("seleccionado")
+    document.getElementById(this.idFichaAnt).classList.remove("seleccionado");
+    document.getElementById(id).classList.add("seleccionado");
+    this.idFichaAnt=id;
   }
+
 
 }
 
