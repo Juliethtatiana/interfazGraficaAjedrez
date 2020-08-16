@@ -30,22 +30,16 @@ export class TableroComponent implements OnInit {
           this.filas[i][j]={clase:'posicion1'};
         }
         this.filas[i][j].id= i+"-"+j;
-        if(i==0){
-          console.log(this.posFichas1);
-         // this.filas[i][j].imagen= this.jugador2.posFichas[j]['imagen'];
-         this.filas[i][j].imagen= this.posFichas2[j]['imagen'];
-        }
-        if(i==1){
-          //this.filas[i][j].imagen= this.jugador2.posicionesFichas[j+8]['imagen'];
-          this.filas[i][j].imagen= this.posFichas2[j+8]['imagen'];
-        }
-        if(i==7){
-          this.filas[i][j].imagen= this.posFichas1[j]['imagen'];
-        }
-        if(i==6){
-          this.filas[i][j].imagen= this.posFichas1[j+8]['imagen'];
-        }
+    
               }
+    }
+  this.ponerFichas();
+  }
+  ponerFichas(){
+    for(var i=0; i<16; i++){
+      this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].imagen= this.posFichas2[i]['imagen'];
+     this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].imagen= this.posFichas1[i]['imagen'];
+     
     }
   }
   seleccionar(id){
