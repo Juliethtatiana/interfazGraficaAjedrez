@@ -1,0 +1,14 @@
+ 
+    <div class="background">
+        <h1 class="title">Ajedrez the Game</h1>
+        <section class="content"><form>
+            <div class="form-group">
+              <label >Nombres de usuario</label>
+              <input type="text" class="form-control" [(ngModel)]="player1" [ngModelOptions]="{standalone: true}" placeholder="Jugador 1">
+              <input type="text" class="form-control" [(ngModel)]="player2" [ngModelOptions]="{standalone: true}" placeholder="Jugador 2">
+              <button type="button" class="btn btn-info" (click)="enviar()" [routerLink]="['juego']">Jugar</button>
+            </div>
+            
+        </form>
+        </section>
+</div>

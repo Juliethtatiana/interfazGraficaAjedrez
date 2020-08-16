@@ -1,0 +1,12 @@
+
+<div style="text-align:center">
+<table id="tabAje" width="50%">
+   
+
+    <tr *ngFor="let fila of filas">
+        <td *ngFor="let celda of fila" id={{celda.id}} class={{celda.clase}} (click)="seleccionar(celda.id)"><img *ngIf="celda.imagen" src={{celda.imagen}}></td>
+    </tr>
+    
+</table>
+</div>
+
