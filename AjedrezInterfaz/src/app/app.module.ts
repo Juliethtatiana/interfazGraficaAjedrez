@@ -8,6 +8,7 @@ import { MiJuegoComponent } from './mi-juego/mi-juego.component';
 import { TableroComponent } from './tablero/tablero.component';
 import { StartComponent } from './start/start.component';
 import { JugadorCardComponent } from './jugador-card/jugador-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JugadorCardComponent } from './jugador-card/jugador-card.component';
     AppRoutingModule,
     NoopAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

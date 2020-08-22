@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { JugadorService } from '../jugador.service';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styleUrls: ['./start.component.css'],
+  providers: [JugadorService]
 })
 export class StartComponent implements OnInit {
   player1: string;
   player2: string;
-  constructor(private route: Router){
+
+  comando = "Prueba";
+  resultado = "";
+  constructor(private route: Router,private http: JugadorService){
   }
   ngOnInit(): void {
   }
@@ -20,5 +26,18 @@ export class StartComponent implements OnInit {
     localStorage.setItem('user2', this.player2 );
     this.route.navigate(['/juego']); //redireccionamiento de pagina al tablero de juego
   }
-
+  enviarComando(){
+    console.log("holiii");
+    this.http.respuestaLlamdoServlet(this.comando).subscribe((data:any)=>{
+      this.resultado = data.comando;
+      for(var i=0; i<8; i++){
+        for(var j=0; j<8; j++){
+          document.getElementById(i+""+j).innerHTML = "";
+        }
+      }
+      if(this.resultado == "Peon a A4"){
+        document.getElementById("30").innerHTML = "&#9817;";
+      }
+    });
+  }
 }
