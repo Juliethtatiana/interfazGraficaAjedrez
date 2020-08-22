@@ -30,6 +30,7 @@ export class StartComponent implements OnInit {
     console.log("holiii");
     this.http.respuestaLlamdoServlet(this.comando).subscribe((data:any)=>{
       this.resultado = data.comando;
+      console.log("respuesta:" + this.resultado);
       for(var i=0; i<8; i++){
         for(var j=0; j<8; j++){
           document.getElementById(i+""+j).innerHTML = "";
