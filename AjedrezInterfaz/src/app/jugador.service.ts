@@ -20,17 +20,19 @@ const httpOptions = {
 })
 export class JugadorService {
 
-  url = "/ServerPrueba/ServletAjedrez";
+  url = "/ServerAjedrez/ServletAjedrez";
 
   constructor(private http: HttpClient) { }
 
-  respuestaLlamdoServlet(comando: string){
+  respuestaLlamdoServlet(player1: string,player2: string){
     var params = new HttpParams();
-    params.append("comando", comando);
+    params.append("player1", player1);
+    params.append("player2", player2);
     const options = {
       params, httpOptions
     }
-    return this.http.post<string>(this.url+'?comando='+comando, options);
+    
+    return this.http.post<string>(this.url+'?player1='+player1+'&player2='+player2, options);
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -1,10 +1,11 @@
 import { Component, OnInit,  Input} from '@angular/core';
-
+import { TableroService } from '../tablero.service';
 
 @Component({
   selector: 'app-tablero',
   templateUrl: './tablero.component.html',
-  styleUrls: ['./tablero.component.css']
+  styleUrls: ['./tablero.component.css'],
+  providers: [TableroService]
 })
 export class TableroComponent implements OnInit {
   @Input() posFichas1: any = [];
@@ -46,6 +47,7 @@ export class TableroComponent implements OnInit {
     document.getElementById(this.idFichaAnt).classList.remove("seleccionado");
     document.getElementById(id).classList.add("seleccionado");
     this.idFichaAnt=id;
+    
   }
 
 

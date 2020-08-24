@@ -24,11 +24,15 @@ export class StartComponent implements OnInit {
     //console.log(this.player1)
     localStorage.setItem('user1', this.player1 );
     localStorage.setItem('user2', this.player2 );
+    this.http.respuestaLlamdoServlet(this.player1,this.player2).subscribe((data:any)=>{
+      this.resultado = data.comando;
+      console.log("respuesta:" + this.resultado);
+    });
     this.route.navigate(['/juego']); //redireccionamiento de pagina al tablero de juego
   }
   enviarComando(){
     console.log("holiii");
-    this.http.respuestaLlamdoServlet(this.comando).subscribe((data:any)=>{
+    this.http.respuestaLlamdoServlet(this.player1,this.player2).subscribe((data:any)=>{
       this.resultado = data.comando;
       console.log("respuesta:" + this.resultado);
       for(var i=0; i<8; i++){
