@@ -24,7 +24,16 @@
 .seleccionado{
     background-color:slateblue;
 }
+.posMov{
+    background-color: skyblue;
+    border-style: solid;
+}
 img{
     width: 40px;
     height: 40px;
+}
+.imgnueva{
+    width: 40px;
+    height: 40px;
+
 }

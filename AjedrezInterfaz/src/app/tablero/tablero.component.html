@@ -4,7 +4,7 @@
    
 
     <tr *ngFor="let fila of filas">
-        <td *ngFor="let celda of fila" id={{celda.id}} class={{celda.clase}} (click)="seleccionar(celda.id)"><img *ngIf="celda.imagen" src={{celda.imagen}}></td>
+        <td *ngFor="let celda of fila" id={{celda.id}} class={{celda.clase}} (click)="seleccionar(celda.id,celda.x,celda.y)"><img *ngIf="celda.imagen"  src={{celda.imagen}}></td>
     </tr>
     
 </table>

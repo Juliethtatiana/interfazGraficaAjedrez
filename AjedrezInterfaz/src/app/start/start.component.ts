@@ -30,19 +30,5 @@ export class StartComponent implements OnInit {
     });
     this.route.navigate(['/juego']); //redireccionamiento de pagina al tablero de juego
   }
-  enviarComando(){
-    console.log("holiii");
-    this.http.respuestaLlamdoServlet(this.player1,this.player2).subscribe((data:any)=>{
-      this.resultado = data.comando;
-      console.log("respuesta:" + this.resultado);
-      for(var i=0; i<8; i++){
-        for(var j=0; j<8; j++){
-          document.getElementById(i+""+j).innerHTML = "";
-        }
-      }
-      if(this.resultado == "Peon a A4"){
-        document.getElementById("30").innerHTML = "&#9817;";
-      }
-    });
-  }
+ 
 }
