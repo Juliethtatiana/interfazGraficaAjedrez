@@ -48,6 +48,14 @@ export class TableroService {
     
     return this.http.get<string>(this.url+'?res='+res+'&jugador='+jugador+'&x='+x+'&y='+y+'&xf='+xf+'&yf='+yf+'&id='+id, options);
   }
+  ConsFicha(res: string){
+    var params = new HttpParams();
+    params.append("res", res);
+    const options = {
+      params, httpOptions
+    }
+    return this.http.get<string>(this.url+'?res='+res, options);
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
