@@ -97,7 +97,7 @@ export class TableroComponent implements OnInit {
       });
    
     }else{
-      if(this.x && this.y && document.getElementById(id).children.length<=0){
+      if(this.x && this.y && document.getElementById(id).children.length<=0 || (jugador==1  && this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].x == x && this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].y == y) || (jugador==0  && this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].x == x && this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].y == y) ){
         var imagen;
         var idx;
         var idy;
@@ -124,24 +124,16 @@ export class TableroComponent implements OnInit {
          
         this.http.MoverFicha("Mov",jugador, this.x, this.y,x,y,this.filas[this.x][this.y].nomficha).subscribe((data:any)=>{
           console.log("respuesta:" + JSON.stringify(data));
-          
-          for(let  i in this.dataAnt){
-            
-            if(this.dataAnt[i]['x']==x  && this.dataAnt[i]['y']==y){
+          if(data!=null){
+           
+            if(data.ficha==this.filas[this.x][this.y].nomficha){
               console.log("la  dataAnt es: "+ JSON.stringify(this.dataAnt))
-              var  idFicha= x+"-"+y;
-              //alert(idFicha);
-              var img= document.createElement("img");
-              img.width=40;
-              img.height=40;
-              img.src=imagen;
-              document.getElementById(idFicha).appendChild(img);
-              document.getElementById(idx+"-"+idy).firstChild.remove;
+               
               if(jugador==0){
                 //console.log("holii");
                 this.filas[this.posFichas1[fichapos]['y']][this.posFichas1[fichapos]['x']].imagen="";
-                this.posFichas1[fichapos]['x']=x;
-                this.posFichas1[fichapos]['y']=y;
+                this.posFichas1[fichapos]['x']=data.x;
+                this.posFichas1[fichapos]['y']=data.y;
                 this.posFichas1[fichapos]['imagen']=imagen;  
                 console.log('holuu');
                
@@ -149,19 +141,28 @@ export class TableroComponent implements OnInit {
               }else{
                 console.log("holii");
                 this.filas[this.posFichas2[fichapos]['y']][this.posFichas2[fichapos]['x']].imagen="";
-                this.posFichas2[fichapos]['x']=x;
-                this.posFichas2[fichapos]['y']=y;
+                this.posFichas2[fichapos]['x']=data.x;
+                this.posFichas2[fichapos]['y']=data.y;
                 this.posFichas2[fichapos]['imagen']=imagen; 
                 
               }
-
+              var  idFicha= data.x+"-"+data.y;
+              //alert(idFicha);
+              var img= document.createElement("img");
+              img.width=40;
+              img.height=40;
+              img.src=imagen;
+              document.getElementById(idFicha).appendChild(img);
+              document.getElementById(idx+"-"+idy).firstChild.remove;
               this.x=undefined;
               this.y=undefined;
-              console.log("entro"+x);
-            }     
+              console.log("entro"+data.x);
+          
+            }
+              
 
-            
           }
+          
           //this.ActualizarTablero(x,y,jugador,imagen);
 
         });
