@@ -24,6 +24,7 @@ export class TableroComponent implements OnInit {
   resultado = "";
   jugador1=1;
   jugador2=0;
+  posiblesMov:any;
   x=undefined;
   y=undefined;
 
@@ -108,7 +109,7 @@ export class TableroComponent implements OnInit {
             idx=this.posFichas2[i]['x'];
             idy=this.posFichas2[i]['y'];
             fichapos=i;
-          this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].imagen="";
+          //
           }
           if(this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].x== this.x  && this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].y== this.y){
            jugador=0;
@@ -116,7 +117,7 @@ export class TableroComponent implements OnInit {
            idx=this.posFichas1[i]['x'];
            idy=this.posFichas1[i]['y'];
            fichapos=i;
-          this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].imagen="";
+          //
           } 
 
          }
@@ -124,34 +125,48 @@ export class TableroComponent implements OnInit {
         this.http.MoverFicha("Mov",jugador, this.x, this.y,x,y,this.filas[this.x][this.y].nomficha).subscribe((data:any)=>{
           console.log("respuesta:" + JSON.stringify(data));
           
-          
-          var  idFicha= x+"-"+y;
-          //alert(idFicha);
-          var img= document.createElement("img");
-          img.width=40;
-          img.height=40;
-          img.src=imagen;
-          document.getElementById(idFicha).appendChild(img);
-          document.getElementById(idx+"-"+idy).firstChild.remove;
-          if(jugador==0){
-            console.log("holii");
-            this.posFichas1[fichapos]['x']=x;
-            this.posFichas1[fichapos]['y']=y;
-            this.posFichas1[fichapos]['imagen']=imagen;  
-          }else{
-            console.log("holii");
-            this.posFichas2[fichapos]['x']=x;
-            this.posFichas2[fichapos]['y']=y;
-            this.posFichas1[fichapos]['imagen']=imagen; 
+          for(let  i in this.dataAnt){
+            
+            if(this.dataAnt[i]['x']==x  && this.dataAnt[i]['y']==y){
+              console.log("la  dataAnt es: "+ JSON.stringify(this.dataAnt))
+              var  idFicha= x+"-"+y;
+              //alert(idFicha);
+              var img= document.createElement("img");
+              img.width=40;
+              img.height=40;
+              img.src=imagen;
+              document.getElementById(idFicha).appendChild(img);
+              document.getElementById(idx+"-"+idy).firstChild.remove;
+              if(jugador==0){
+                //console.log("holii");
+                this.filas[this.posFichas1[fichapos]['y']][this.posFichas1[fichapos]['x']].imagen="";
+                this.posFichas1[fichapos]['x']=x;
+                this.posFichas1[fichapos]['y']=y;
+                this.posFichas1[fichapos]['imagen']=imagen;  
+                console.log('holuu');
+               
+                
+              }else{
+                console.log("holii");
+                this.filas[this.posFichas2[fichapos]['y']][this.posFichas2[fichapos]['x']].imagen="";
+                this.posFichas2[fichapos]['x']=x;
+                this.posFichas2[fichapos]['y']=y;
+                this.posFichas2[fichapos]['imagen']=imagen; 
+                
+              }
+
+              this.x=undefined;
+              this.y=undefined;
+              console.log("entro"+x);
+            }     
+
+            
           }
           //this.ActualizarTablero(x,y,jugador,imagen);
 
         });
-
-        this.x=undefined;
-        this.y=undefined;
-        console.log("entro"+x);
       }
+        
 
     }
     
