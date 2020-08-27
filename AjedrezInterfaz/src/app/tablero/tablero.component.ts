@@ -71,10 +71,10 @@ export class TableroComponent implements OnInit {
       var jugador;
       for(var i=0; i<16; i++){
        if(this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].x== x  && this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].y== y){
-        jugador=this.jugador1;
+        jugador=1;
        }
        if(this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].x== x  && this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].y== y){
-        jugador=this.jugador2;
+        jugador=0;
        } 
       }
 
@@ -92,10 +92,7 @@ export class TableroComponent implements OnInit {
       this.y=y;
       this.http.ConsFicha("Consficha").subscribe((data:any)=>{
         console.log("respuesta:" + JSON.stringify(data));
-      }
-      );{
-
-      }
+      });
       });
    
     }else{
@@ -106,7 +103,7 @@ export class TableroComponent implements OnInit {
         var fichapos;
         for(var i=0; i<16; i++){
           if(this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].x== this.x  && this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].y== this.y){
-           jugador=this.jugador1;
+           jugador=1;
             imagen=this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].imagen;
             idx=this.posFichas2[i]['x'];
             idy=this.posFichas2[i]['y'];
@@ -114,7 +111,7 @@ export class TableroComponent implements OnInit {
           this.filas[this.posFichas2[i]['y']][this.posFichas2[i]['x']].imagen="";
           }
           if(this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].x== this.x  && this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].y== this.y){
-           jugador=this.jugador2;
+           jugador=0;
            imagen=this.filas[this.posFichas1[i]['y']][this.posFichas1[i]['x']].imagen;
            idx=this.posFichas1[i]['x'];
            idy=this.posFichas1[i]['y'];
@@ -126,14 +123,8 @@ export class TableroComponent implements OnInit {
          
         this.http.MoverFicha("Mov",jugador, this.x, this.y,x,y,this.filas[this.x][this.y].nomficha).subscribe((data:any)=>{
           console.log("respuesta:" + JSON.stringify(data));
-         /* if(jugador==0){
-            this.posFichas1[fichapos]['x'].x=x;
-            this.posFichas1[fichapos]['y'].y=y;
-          }else{
-            this.posFichas2[fichapos]['x'].x=x;
-            this.posFichas2[fichapos]['y'].y=y;
-          }
-          */
+          
+          
           var  idFicha= x+"-"+y;
           //alert(idFicha);
           var img= document.createElement("img");
@@ -142,7 +133,17 @@ export class TableroComponent implements OnInit {
           img.src=imagen;
           document.getElementById(idFicha).appendChild(img);
           document.getElementById(idx+"-"+idy).firstChild.remove;
-          
+          if(jugador==0){
+            console.log("holii");
+            this.posFichas1[fichapos]['x']=x;
+            this.posFichas1[fichapos]['y']=y;
+            this.posFichas1[fichapos]['imagen']=imagen;  
+          }else{
+            console.log("holii");
+            this.posFichas2[fichapos]['x']=x;
+            this.posFichas2[fichapos]['y']=y;
+            this.posFichas1[fichapos]['imagen']=imagen; 
+          }
           //this.ActualizarTablero(x,y,jugador,imagen);
 
         });
